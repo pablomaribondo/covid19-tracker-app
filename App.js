@@ -1,10 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+
+import { statistics } from './Requests';
 
 import Card from './components/Card';
 import Header from './components/Header';
 
-export default function App() {
+const App = () => {
+  const [cases, setCases] = useState('-');
+  const [suspectedCases, setSuspectedCases] = useState('-');
+  const [confirmedCases, setConfirmedCases] = useState('-');
+  const [deaths, setDeaths] = useState('-');
+  const [recovereds, setRecovereds] = useState('-');
+
+  useEffect(() => {
+    statistics()
+      .then(response => {
+        setCases(response.cases);
+        setSuspectedCases(response.suspectedCases);
+        setConfirmedCases(response.confirmedCases);
+        setDeaths(response.deaths);
+        setRecovereds(response.recovereds);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <View style={styles.screen}>
       <Header title='Coronavirus Tracker'/>
@@ -16,31 +38,31 @@ export default function App() {
           title='Cases'
           color='#F8F399'
           icon={require('./assets/cases.png')}
-          data='79532'
+          data={cases}
         />
         <Card
           title='Suspected cases'
           color='#DACA1A'
           icon={require('./assets/suspectedCases.png')}
-          data='5248'
+          data={suspectedCases}
         />
         <Card
           title='Confirmed cases'
           color='#D88A20'
           icon={require('./assets/confirmedCases.png')}
-          data='74284'
+          data={confirmedCases}
         />
         <Card
           title='Deaths'
           color='#B3090D'
           icon={require('./assets/deaths.png')}
-          data='2009'
+          data={deaths}
         />
         <Card
           title='Recovered'
           color='#658D26'
           icon={require('./assets/recovereds.png')}
-          data='14938'
+          data={recovereds}
         />
       </View>
     </View>
@@ -64,3 +86,5 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 });
+
+export default App;
