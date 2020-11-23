@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "babel-plugin-inline-dotenv": "^1.6.0",
     "expo": "~36.0.0",
     "querystring": "^0.2.0",
     "react": "~16.9.0",
