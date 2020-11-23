@@ -11,7 +11,9 @@
 
 ## Screenshot
 
-![screenshot](.github/screenshot.jpeg)
+<kbd>
+  <img src=".github/screenshot.jpeg" alt="screenshot" width="300" />
+</kbd>
 
 [expo]: https://facebook.github.io/react-native/
 [reactnative]: https://expo.io/
